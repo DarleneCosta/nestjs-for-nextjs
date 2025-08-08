@@ -1,0 +1,6 @@
+@base = http://localhost:3000
+
+###Read one user by id
+# @name getUserById
+GET {{base}}/users/123
+
