@@ -17,7 +17,7 @@ export default tseslint.config(
         ...globals.node,
         ...globals.jest,
       },
-      sourceType: 'commonjs',
+      sourceType: 'module',
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
@@ -29,6 +29,14 @@ export default tseslint.config(
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-floating-promises': 'warn',
       '@typescript-eslint/no-unsafe-argument': 'warn'
+    },
+  },
+  {
+    files: ['src/**/*.dto.ts'],
+    rules: {
+      // Decorators de class-validator podem ser tipados como "error" pelo TS checker em chamadas,
+      // causando falso positivo neste projeto.
+      '@typescript-eslint/no-unsafe-call': 'off',
     },
   },
 );
