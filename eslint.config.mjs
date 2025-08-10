@@ -39,4 +39,14 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-call': 'off',
     },
   },
+  {
+    files: ['src/**/*.hashing.service.ts'],
+    rules: {
+      // Serviços de hashing podem ter tipos "error" do bcrypt pelo TS checker
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+    },
+  },
 );

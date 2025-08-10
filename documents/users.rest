@@ -4,3 +4,12 @@
 # @name getUserById
 GET {{base}}/users/123
 
+###Create user
+POST {{base}}/users
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "password": "123456"
+}
