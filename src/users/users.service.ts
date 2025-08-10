@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { User } from './entities/user.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
-  getUserById(id: number) {
-    return 'User ' + id;
-  }
+  constructor(private readonly usersRepository: Repository<User>) {}
 }
