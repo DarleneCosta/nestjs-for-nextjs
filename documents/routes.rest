@@ -6,6 +6,7 @@
 # @name authLogin
 POST {{base}}/auths/login
 Content-Type: application/json
+
 {
   "email": "john.doe@example.com",
   "password": "123456"
@@ -15,7 +16,7 @@ Content-Type: application/json
 # @name createUser
 POST {{base}}/users
 Content-Type: application/json
-Authorization: {{token}}
+
 {
   "name": "John Doe",
   "email": "john.doe@example.com",
@@ -24,6 +25,6 @@ Authorization: {{token}}
 
 ###Get User By Id
 # @name getUserById
-GET {{base}}/users/123
+GET {{base}}/users/32729982-1022-4cc1-9d17-98d9a1314090
 Content-Type: application/json
-Authorization: {{token}}  
+Authorization: {{token}}
