@@ -1,9 +1,0 @@
-@base = http://localhost:3000
-
-POST {{base}}/posts
-Content-Type: application/json
-
-{
-  "title": "Teste",
-  "content": "Teste"
-} 

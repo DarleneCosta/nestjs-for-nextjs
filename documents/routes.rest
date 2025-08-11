@@ -1,0 +1,29 @@
+# Configuração global - estas variáveis são compartilhadas entre todos os arquivos .rest
+@base = http://localhost:3000
+@token =Bearer {{authLogin.response.body.accessToken}}
+
+###Auth Login
+# @name authLogin
+POST {{base}}/auths/login
+Content-Type: application/json
+{
+  "email": "john.doe@example.com",
+  "password": "123456"
+}  
+
+###Create User
+# @name createUser
+POST {{base}}/users
+Content-Type: application/json
+Authorization: {{token}}
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "password": "123456"
+}
+
+###Get User By Id
+# @name getUserById
+GET {{base}}/users/123
+Content-Type: application/json
+Authorization: {{token}}  
