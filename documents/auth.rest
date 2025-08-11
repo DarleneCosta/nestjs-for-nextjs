@@ -1,0 +1,10 @@
+@base = http://localhost:3000
+
+###Login
+POST {{base}}/auths/login
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "password": "123456"
+}   
