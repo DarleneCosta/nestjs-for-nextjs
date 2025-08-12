@@ -34,6 +34,17 @@ Content-Type: application/json
   "email": "john.doe.hii@example.com"
 }
 
+###Update Password
+# @name updatePassword
+PATCH {{base}}/users/me/password
+Authorization: {{token}}
+Content-Type: application/json  
+
+{
+  "currentPassword": "123456789",
+  "newPassword": "123456"
+}
+
 ###Get User By Id
 # @name getUserById
 GET {{base}}/users/32729982-1022-4cc1-9d17-98d9a1314090
