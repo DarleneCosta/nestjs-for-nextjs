@@ -59,8 +59,8 @@ export class UsersController {
     @Req() req: AuthenticatedRequest,
     @Body() body: UpdatePasswordDto,
   ) {
-    await this.usersService.updatePassword(req.user.id, body);
-    return { message: 'Senha atualizada com sucesso' };
+    const user = await this.usersService.updatePassword(req.user.id, body);
+    return new ResponseUserDto(user);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -73,7 +73,8 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Delete('me')
   async deleteUser(@Req() req: AuthenticatedRequest) {
-    await this.usersService.delete(req.user.id);
-    return { message: 'Usuário deletado com sucesso' };
+    const user = await this.usersService.findOneByOrFail({ id: req.user.id });
+    await this.usersService.delete(user.id);
+    return new ResponseUserDto(user);
   }
 }
