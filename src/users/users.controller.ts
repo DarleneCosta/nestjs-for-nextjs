@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   NotFoundException,
   Param,
@@ -60,5 +61,19 @@ export class UsersController {
   ) {
     await this.usersService.updatePassword(req.user.id, body);
     return { message: 'Senha atualizada com sucesso' };
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('me')
+  async readOneUserMe(@Req() req: AuthenticatedRequest) {
+    const user = await this.usersService.findOneByOrFail({ id: req.user.id });
+    return new ResponseUserDto(user);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete('me')
+  async deleteUser(@Req() req: AuthenticatedRequest) {
+    await this.usersService.delete(req.user.id);
+    return { message: 'Usuário deletado com sucesso' };
   }
 }

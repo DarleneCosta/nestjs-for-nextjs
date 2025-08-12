@@ -96,4 +96,9 @@ export class UsersService {
     user.forceLogout = true;
     return this.save(user);
   }
+
+  async delete(id: string) {
+    const user = await this.findOneByOrFail({ id });
+    return this.usersRepository.remove(user);
+  }
 }

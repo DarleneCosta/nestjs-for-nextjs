@@ -50,3 +50,15 @@ Content-Type: application/json
 GET {{base}}/users/32729982-1022-4cc1-9d17-98d9a1314090
 Content-Type: application/json
 Authorization: {{token}}
+
+###Read One User
+# @name readOneUserMe
+GET {{base}}/users/me
+Content-Type: application/json
+Authorization: {{token}}
+
+###Delete User
+# @name deleteUser
+DELETE {{base}}/users/32729982-1022-4cc1-9d17-98d9a1314090
+Content-Type: application/json
+Authorization: {{token}}
