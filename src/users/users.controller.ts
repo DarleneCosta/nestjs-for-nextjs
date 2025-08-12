@@ -15,6 +15,7 @@ import { UsersService } from './users.service';
 import { JwtAuthGuard } from 'src/auths/guards/jwt-auth.guard';
 import type { AuthenticatedRequest } from 'src/auths/types/authenticated-request';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { ResponseUserDto } from './dto/response-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -31,13 +32,13 @@ export class UsersController {
     if (!user) {
       throw new NotFoundException('Usuário não encontrado');
     }
-    return user;
+    return new ResponseUserDto(user);
   }
 
   @Post()
   async createUser(@Body() createUserDto: CreateUserDto) {
     const user = await this.usersService.create(createUserDto);
-    return user;
+    return new ResponseUserDto(user);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -47,6 +48,6 @@ export class UsersController {
     @Body() body: UpdateUserDto,
   ) {
     const user = await this.usersService.update(req.user.id, body);
-    return user;
+    return new ResponseUserDto(user);
   }
 }
