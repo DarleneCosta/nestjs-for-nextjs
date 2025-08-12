@@ -4,6 +4,7 @@ import {
   Get,
   NotFoundException,
   Param,
+  Patch,
   Post,
   Req,
   UseGuards,
@@ -13,6 +14,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from 'src/auths/guards/jwt-auth.guard';
 import type { AuthenticatedRequest } from 'src/auths/types/authenticated-request';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -34,7 +36,17 @@ export class UsersController {
 
   @Post()
   async createUser(@Body() createUserDto: CreateUserDto) {
-    const user = await this.usersService.createUser(createUserDto);
+    const user = await this.usersService.create(createUserDto);
+    return user;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch('me')
+  async updateUser(
+    @Req() req: AuthenticatedRequest,
+    @Body() body: UpdateUserDto,
+  ) {
+    const user = await this.usersService.update(req.user.id, body);
     return user;
   }
 }

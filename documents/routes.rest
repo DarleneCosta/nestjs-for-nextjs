@@ -8,7 +8,7 @@ POST {{base}}/auths/login
 Content-Type: application/json
 
 {
-  "email": "john.doe@example.com",
+  "email": "john.doe.hii@example.com",
   "password": "123456"
 }  
 
@@ -21,6 +21,17 @@ Content-Type: application/json
   "name": "John Doe",
   "email": "john.doe@example.com",
   "password": "123456"
+}
+
+###update user
+# @name updateUser
+PATCH {{base}}/users/me
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "name": "John Doe Hii",
+  "email": "john.doe.hii@example.com"
 }
 
 ###Get User By Id
