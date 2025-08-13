@@ -1,4 +1,4 @@
-import { User } from '../entities/user.entity';
+import { Users } from '../entities/user.entity';
 
 export class ResponseUserDto {
   readonly id: string;
@@ -7,7 +7,7 @@ export class ResponseUserDto {
   readonly createdAt: Date;
   readonly updatedAt: Date;
 
-  constructor(user: User) {
+  constructor(user: Users) {
     this.id = user.id;
     this.name = user.name;
     this.email = user.email;

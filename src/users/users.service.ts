@@ -3,7 +3,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { User } from './entities/user.entity';
+import { Users } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -14,12 +14,12 @@ import { UpdatePasswordDto } from './dto/update-password.dto';
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User)
-    private readonly usersRepository: Repository<User>,
+    @InjectRepository(Users)
+    private readonly usersRepository: Repository<Users>,
     private readonly hashingService: HashingService,
   ) {}
 
-  async create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto): Promise<Users> {
     //email unico
     await this.failIfEmailExists(createUserDto.email);
 
@@ -45,15 +45,15 @@ export class UsersService {
     }
   }
 
-  async findByEmail(email: string) {
+  async findByEmail(email: string): Promise<Users | null> {
     return this.usersRepository.findOneBy({ email });
   }
 
-  async findById(id: string) {
+  async findById(id: string): Promise<Users | null> {
     return this.usersRepository.findOneBy({ id });
   }
 
-  async findOneByOrFail(userData: Partial<User>) {
+  async findOneByOrFail(userData: Partial<Users>): Promise<Users> {
     const user = await this.usersRepository.findOneBy(userData);
     if (!user) {
       throw new NotFoundException('Usuário não encontrado');
@@ -61,11 +61,11 @@ export class UsersService {
     return user;
   }
 
-  async save(user: User) {
+  async save(user: Users): Promise<Users> {
     return this.usersRepository.save(user);
   }
 
-  async update(id: string, dto: UpdateUserDto) {
+  async update(id: string, dto: UpdateUserDto): Promise<Users> {
     if (!dto.email && !dto.name) {
       throw new BadRequestException('Preencher pelo menos um campo');
     }
@@ -80,7 +80,7 @@ export class UsersService {
     return this.save(user);
   }
 
-  async updatePassword(id: string, dto: UpdatePasswordDto) {
+  async updatePassword(id: string, dto: UpdatePasswordDto): Promise<Users> {
     const user = await this.findOneByOrFail({ id });
 
     const isCurrentPasswordValid = await this.hashingService.compare(

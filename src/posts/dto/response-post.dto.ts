@@ -1,4 +1,4 @@
-import { Post } from '../entities/post.entity';
+import { Posts } from '../entities/post.entity';
 
 export class PostResponseDto {
   readonly id: string;
@@ -11,7 +11,7 @@ export class PostResponseDto {
   readonly createdAt: Date;
   readonly updatedAt: Date;
 
-  constructor(post: Post) {
+  constructor(post: Posts) {
     this.id = post.id;
     this.title = post.title;
     this.slug = post.slug;

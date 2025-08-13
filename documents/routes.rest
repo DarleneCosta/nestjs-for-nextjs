@@ -81,37 +81,37 @@ Authorization: Bearer {{jwtToken}}
 
 ### Create post owned
 # @name createPostOwned
-POST {{baseUrl}}/post/me
+POST {{baseUrl}}/posts/me
 Content-Type: application/json
 Authorization: Bearer {{jwtToken}}
 
 {
   "title": "Título do post",
-  "excerpt": "Excerto",
-  "content": "Conteúdo"
+  "excerpt": "Excerto do post",
+  "content": "Conteúdo do post"
 }
 
 ### Read all post public
 # @name readAllPostPublic
-GET {{baseUrl}}/post/
+GET {{baseUrl}}/posts/
 
 ### Read one post public
 # @name readOnePostPublic
-GET {{baseUrl}}/post/{{postSlug}}
+GET {{baseUrl}}/posts/{{postSlug}}
 
 ### Read all post owned
 # @name readAllPostOwned
-GET {{baseUrl}}/post/me
+GET {{baseUrl}}/posts/me
 Authorization: Bearer {{jwtToken}}
 
 ### Read one post owned
 # @name readOnePostOwned
-GET {{baseUrl}}/post/me/{{postUuid}}
+GET {{baseUrl}}/posts/me/{{postUuid}}
 Authorization: Bearer {{jwtToken}}
 
 ### Update one post owned
 # @name updateOnePostOwned
-PATCH {{baseUrl}}/post/me/{{postUuid}}
+PATCH {{baseUrl}}/posts/me/{{postUuid}}
 Content-Type: application/json
 Authorization: Bearer {{jwtToken}}
 
@@ -124,7 +124,7 @@ Authorization: Bearer {{jwtToken}}
 
 ### Delete one post owned
 # @name deleteOnePostOwned
-DELETE {{baseUrl}}/post/me/{{postUuid}}
+DELETE {{baseUrl}}/posts/me/{{postUuid}}
 Authorization: Bearer {{jwtToken}}
 
 # UPLOAD ######################################################################
