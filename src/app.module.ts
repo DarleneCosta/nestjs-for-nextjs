@@ -21,7 +21,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
           return {
             type: 'better-sqlite3',
             database: process.env.DB_DATABASE || './db.sqlite',
-            synchronize: process.env.DB_SYNCHRONIZE === '1',
+            synchronize: process.env.DB_SYNCHRONIZE === '1', // TODO: Remover em produção
             autoLoadEntities: process.env.DB_AUTO_LOAD_ENTITIES === '1',
           };
         }
