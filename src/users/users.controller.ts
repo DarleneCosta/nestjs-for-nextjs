@@ -76,7 +76,7 @@ export class UsersController {
   @Delete('me')
   async deleteUser(@Req() req: AuthenticatedRequest) {
     const user = await this.usersService.findOneByOrFail({ id: req.user.id });
-    await this.usersService.delete(user.id);
+    await this.usersService.remove(user.id);
     return new ResponseUserDto(user);
   }
 }

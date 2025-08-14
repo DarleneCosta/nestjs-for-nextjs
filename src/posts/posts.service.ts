@@ -114,7 +114,17 @@ export class PostsService {
 
   async remove(postData: Partial<Posts>, author: Users): Promise<Posts> {
     const post = await this.findOneOrFailOwned(postData, author);
+    const result = { ...post, deletedAt: new Date() };
     await this.postRepository.remove(post);
-    return post;
+    return result;
+  }
+
+  async findAll(postData: Partial<Posts>): Promise<Posts[]> {
+    const posts = await this.postRepository.find({
+      where: postData,
+      order: { createdAt: 'DESC' },
+      relations: ['author'],
+    });
+    return posts;
   }
 }

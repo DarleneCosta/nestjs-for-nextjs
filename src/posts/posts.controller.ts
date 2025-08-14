@@ -72,4 +72,19 @@ export class PostsController {
     const post = await this.postsService.remove({ id }, req.user);
     return new PostResponseDto(post);
   }
+
+  @Get('/:slug')
+  async findOnePublished(@Param('slug') slug: string) {
+    const post = await this.postsService.findOneOrFail({
+      slug,
+      published: true,
+    });
+    return new PostResponseDto(post);
+  }
+
+  @Get('')
+  async findAllPublished() {
+    const posts = await this.postsService.findAll({ published: true });
+    return posts.map(post => new PostResponseDto(post));
+  }
 }
