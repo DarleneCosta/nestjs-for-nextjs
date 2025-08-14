@@ -10,6 +10,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
 import { Users } from 'src/users/entities/user.entity';
 import { createSlugFromText } from 'src/common/utils/create-slug-from-text';
+import { UpdatePostDto } from './dto/update-post.dto';
 
 @Injectable()
 export class PostsService {
@@ -87,5 +88,27 @@ export class PostsService {
       relations: ['author'],
     });
     return posts;
+  }
+
+  async update(
+    postData: Partial<Posts>,
+    dto: UpdatePostDto,
+    author: Users,
+  ): Promise<Posts> {
+    if (Object.keys(dto).length === 0) {
+      throw new BadRequestException(
+        'Não foram fornecidos dados para atualizar',
+      );
+    }
+
+    const post = await this.findOneOrFailOwned(postData, author);
+
+    post.title = dto.title ?? post.title;
+    post.excerpt = dto.excerpt ?? post.excerpt;
+    post.content = dto.content ?? post.content;
+    post.coverImageUrl = dto.coverImageUrl ?? post.coverImageUrl;
+    post.published = dto.published ?? post.published;
+
+    return this.postRepository.save(post);
   }
 }

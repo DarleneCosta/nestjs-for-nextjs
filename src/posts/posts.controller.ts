@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
+  Patch,
   Post,
   Req,
   UseGuards,
@@ -13,6 +14,7 @@ import { PostResponseDto } from './dto/response-post.dto';
 import { JwtAuthGuard } from 'src/auths/guards/jwt-auth.guard';
 import { CreatePostDto } from './dto/create-post.dto';
 import type { AuthenticatedRequest } from 'src/auths/types/authenticated-request';
+import { UpdatePostDto } from './dto/update-post.dto';
 
 @Controller('posts')
 export class PostsController {
@@ -43,5 +45,20 @@ export class PostsController {
   async findAllOwned(@Req() req: AuthenticatedRequest) {
     const posts = await this.postsService.findAllOwned(req.user);
     return posts.map(post => new PostResponseDto(post));
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch('me/:id')
+  async updateOneOwned(
+    @Req() req: AuthenticatedRequest,
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() updatePostDto: UpdatePostDto,
+  ) {
+    const post = await this.postsService.update(
+      { id },
+      updatePostDto,
+      req.user,
+    );
+    return new PostResponseDto(post);
   }
 }
