@@ -20,7 +20,7 @@ export class CreatePostDto {
   @IsNotEmpty({ message: 'Conteúdo é obrigatório' })
   content: string;
 
-  @IsUrl({ require_tld: false })
+  @IsUrl({ require_tld: false }, { message: 'URL da imagem de capa inválida' })
   @IsOptional()
   coverImageUrl: string;
 }

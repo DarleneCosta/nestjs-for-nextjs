@@ -2,10 +2,13 @@ import { Users } from 'src/users/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
+  Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
+@Entity()
 export class Posts {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -28,12 +31,12 @@ export class Posts {
   @Column({ default: false })
   published: boolean;
 
-  @Column({ nullable: true })
+  @CreateDateColumn()
   createdAt: Date;
 
-  @CreateDateColumn()
+  @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => Users)
+  @ManyToOne(() => Users, { nullable: false })
   author: Users;
 }
