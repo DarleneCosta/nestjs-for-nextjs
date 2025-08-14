@@ -37,6 +37,6 @@ export class Posts {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => Users, { nullable: false })
+  @ManyToOne(() => Users, { onDelete: 'CASCADE' }) // onDelete: 'CASCADE' é para deletar o post quando o usuário for deletado
   author: Users;
 }
