@@ -111,4 +111,10 @@ export class PostsService {
 
     return this.postRepository.save(post);
   }
+
+  async remove(postData: Partial<Posts>, author: Users): Promise<Posts> {
+    const post = await this.findOneOrFailOwned(postData, author);
+    await this.postRepository.remove(post);
+    return post;
+  }
 }
