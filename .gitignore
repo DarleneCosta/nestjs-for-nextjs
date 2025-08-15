@@ -3,7 +3,7 @@ db.sqlite
 /dist
 /node_modules
 /build
-
+/uploads
 # Logs
 logs
 *.log

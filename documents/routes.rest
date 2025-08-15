@@ -86,10 +86,10 @@ Content-Type: application/json
 Authorization: Bearer {{jwtToken}}
 
 {
-  "title": "Título do post",
+  "title": "Título do post Imagem",
   "excerpt": "Excerto do post",
   "content": "Conteúdo do post",
-  "coverImageUrl": "https://example.com/image.jpg"
+  "coverImageUrl": "{{imageUrl}}"
 }
 
 ### Read all post public
@@ -140,7 +140,7 @@ Content-Type: multipart/form-data; boundary=----BryenFormBoundary
 Content-Disposition: form-data; name="file"; filename="exemplo.png"
 Content-Type: image/png
 
-< ../dev/images/sample-image.jpeg
+< ../dev/images/sample.jpeg
 ------BryenFormBoundary--
 
 ### Read Image
