@@ -7,6 +7,8 @@ import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UploadModule } from './uploads/uploads.module';
+import { AllExceptionsFilter } from './common/filters/all-exception.filters';
+import { APP_FILTER } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -42,7 +44,13 @@ import { UploadModule } from './uploads/uploads.module';
     UploadModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: AllExceptionsFilter,
+    },
+    AppService,
+  ],
   exports: [],
 })
 export class AppModule {}
