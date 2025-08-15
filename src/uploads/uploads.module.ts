@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { UploadController } from './upload.controller';
+import { UploadController } from './uploads.controller';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { resolve } from 'path';
-import { UploadService } from './upload.service';
+import { UploadService } from './uploads.service';
 
 @Module({
   imports: [

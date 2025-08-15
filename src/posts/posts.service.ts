@@ -68,6 +68,7 @@ export class PostsService {
       published: false,
       author: author,
       slug: createSlugFromText(dto.title),
+      coverImageUrl: dto.coverImageUrl,
     });
 
     const createdPost = await this.postRepository

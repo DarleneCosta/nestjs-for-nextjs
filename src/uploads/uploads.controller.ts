@@ -6,8 +6,8 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { storage, limits, fileFilter } from './upload.config';
-import { UploadService } from './upload.service';
+import { storage, limits, fileFilter } from './uploads.config';
+import { UploadService } from './uploads.service';
 import { JwtAuthGuard } from 'src/auths/guards/jwt-auth.guard';
 
 @Controller('upload')
