@@ -1,5 +1,5 @@
 # Configuração global - estas variáveis são compartilhadas entre todos os arquivos .rest
-@baseUrl = http://localhost:3000
+@baseUrl = http://localhost:3001
 @jwtToken={{authLogin.response.body.accessToken}}
 
 
