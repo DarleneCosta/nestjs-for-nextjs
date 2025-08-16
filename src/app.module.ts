@@ -9,6 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UploadModule } from './uploads/uploads.module';
 import { AllExceptionsFilter } from './common/filters/all-exception.filters';
 import { APP_FILTER } from '@nestjs/core';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
@@ -17,6 +18,16 @@ import { APP_FILTER } from '@nestjs/core';
     UsersModule,
     ConfigModule.forRoot({
       isGlobal: true,
+    }),
+    ThrottlerModule.forRoot({
+      //limita o numero de requisições por segundo
+      throttlers: [
+        {
+          ttl: 10000, //10 segundos
+          limit: 10, //10 requisições
+          blockDuration: 5000, //5 segundos
+        },
+      ],
     }),
     TypeOrmModule.forRootAsync({
       useFactory: () => {
